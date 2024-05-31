@@ -20,19 +20,6 @@ public class BFS {
         }
     }
 
-
-    // BFS(int v) {
-    //     V = v;
-    //     adj = new LinkedList[V];
-    //     for (int i = 0; i < v; i++) {
-    //         adj[i] = new LinkedList<>();
-    //     }
-    //     queue = new LinkedList<>();
-    //     levels = new ArrayList<>(V);
-    //     for (int i = 0; i < V; i++) {
-    //         levels.add(-1); 
-    //     }
-    // }
     void codeBfs(int start){
         boolean[] vis =new boolean[V];
         q.add(start);
@@ -45,7 +32,7 @@ public class BFS {
                 if(!vis[i]){
                     vis[i]=true;
                     q.add(i);
-                    level.set(i, level.get(x+1));
+                    level.set(i, level.get(x)+1);
                 }
             }
             
@@ -64,9 +51,15 @@ public class BFS {
             int x=sc.nextInt();
             int y=sc.nextInt();
             graph.adj[x].add(y);
+            graph.adj[y].add(x);
 
         }
         graph.codeBfs(0);
+        System.out.println("The leveles: ");
+        for(int i=0;i<v;i++){
+            // System.out.println(graph.level.get(i)+" ");
+            System.out.println("Vertex " + i + " : Level " + graph.level.get(i));
+        }
     }
     
 }
