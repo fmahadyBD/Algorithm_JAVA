@@ -1,34 +1,40 @@
 package longestCommonSubsecquence;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class AllCommonSubS {
 
-    static HashSet<String> subSequenceSet = new HashSet<>();
-    static HashMap<String, Integer> subSequenceLenghtMap = new HashMap<>();
-
-    public static void findAllCommonSubSequwnces(String a, String b, int i, int j, String subSeq, int length) {
-        if (i == 0 || j == 0) {
+    static HashMap<String,Integer> subSequenceLength=new HashMap<>();
+    static HashSet<String> subSequenceSet=new HashSet<>();
+    public static void findAllCommonSubSequwnces(String x,String y, int n,int m,String subSeq,int lenght){
+        if(n==m) {
+            subSequenceLength.put(subSeq, lenght);
             subSequenceSet.add(subSeq);
-            subSequenceLenghtMap.put(subSeq,length);
-
+            return;
         }
-        if( a.charAt(i-1)== b.charAt(j-1)){
-            findAllCommonSubSequwnces(a, b, i-1, j-1,a.charAt(i-1)+ subSeq,1+ length);
+        if(x.charAt(n-1)==y.charAt(m-1)) findAllCommonSubSequwnces(x,y,n-1,m-1,subSeq+x.charAt(n-1),1+lenght);
+        else {
+            findAllCommonSubSequwnces(x, y, n-1, m, subSeq, lenght);
+            findAllCommonSubSequwnces(x, y, n, m-1, subSeq, lenght);
+        }
+            
 
         
-        }
-        else{
-            findAllCommonSubSequwnces(a, b, i-1, j, subSeq, length);
-            findAllCommonSubSequwnces(a, b, i, j-1, subSeq, length);
-
-        }
     }
 
     public static void main(String[] args) {
         String x = "ahajhdjashjah";
         String y = "jdaskjdjwhijhsjkfn";
         findAllCommonSubSequwnces(x, y, x.length(), y.length(), "", 0);
+        List<String> subSeqList=new ArrayList<>(subSequenceSet);
+        
+
+        Collections.sort(subSeqList,(a,b)->subSequenceLength.get(b)-subSequenceLength.get(a));
+        Collections.sort(subSeqList,(a,b)->subSequenceLength.get(b)-subSequenceLength.get(a));
+        
     }
 }

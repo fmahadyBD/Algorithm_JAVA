@@ -1,3 +1,4 @@
+package QuickSort;
 public class QuickSort {
     public static int partision(int arr[],int low,int high){
 
@@ -13,6 +14,8 @@ public class QuickSort {
        
 
         }
+        //previous loop will sort all low value 0-i (by pivot). now sawp by pivot(in high)
+        //
         i++;
         int temp=arr[i];
         arr[i]=arr[high];
